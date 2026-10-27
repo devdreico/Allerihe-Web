@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ArrowUp, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export function Footer() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,11 +16,11 @@ export function Footer() {
     <>
       <footer className="site-footer">
         <div className="page-wrap footer-inner">
-          <a className="footer-brand" href="#inicio">ALLERIHE<span>®</span></a>
+          <Link className="footer-brand" to="/">ALLERIHE<span>®</span></Link>
           <p>Conocimiento en movimiento.<br />Un proyecto planeado en 2025, en desarrollo desde 2026.</p>
           <div className="footer-actions">
             <button className="easter-trigger" type="button" onClick={() => setIsOpen(true)} aria-label="Abrir nota escondida">＋</button>
-            <a className="back-top" href="#inicio" aria-label="Volver al inicio"><ArrowUp size={17} /></a>
+            <Link className="back-top" to="/" aria-label="Volver al inicio"><ArrowUp size={17} /></Link>
           </div>
         </div>
       </footer>

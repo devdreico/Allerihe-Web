@@ -1,21 +1,50 @@
+import { useEffect } from 'react';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { Header } from './components/Header.jsx';
-import { Hero } from './components/Hero.jsx';
-import { ProgressSection } from './components/ProgressSection.jsx';
-import { AcademySection, CommunitySection, MissionSection } from './components/EditorialSections.jsx';
 import { Footer } from './components/Footer.jsx';
+import {
+  AcademyPage,
+  CommunityPage,
+  HomePage,
+  InitiativesPage,
+  ManifestoPage,
+  MissionPage,
+  NotFoundPage,
+} from './pages/Pages.jsx';
 
-export default function App() {
+function PageFrame({ children }) {
   return (
     <>
       <Header />
-      <main>
-        <Hero />
-        <MissionSection />
-        <ProgressSection />
-        <AcademySection />
-        <CommunitySection />
-      </main>
+      <main className="page-main">{children}</main>
       <Footer />
     </>
+  );
+}
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/manifiesto" element={<PageFrame><ManifestoPage /></PageFrame>} />
+        <Route path="/mision" element={<PageFrame><MissionPage /></PageFrame>} />
+        <Route path="/iniciativas" element={<PageFrame><InitiativesPage /></PageFrame>} />
+        <Route path="/comunidad" element={<PageFrame><CommunityPage /></PageFrame>} />
+        <Route path="/academia" element={<PageFrame><AcademyPage /></PageFrame>} />
+        <Route path="*" element={<PageFrame><NotFoundPage /></PageFrame>} />
+      </Routes>
+    </BrowserRouter>
   );
 }
