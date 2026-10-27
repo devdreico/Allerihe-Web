@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f2f0e9" />
+    <meta name="theme-color" content="#edf3f6" />
     <meta name="description" content="Allerihe explora ciencia, historia, filosofía y cultura para convertir conocimiento en mejores preguntas." />
     <link rel="canonical" href="https://allerihe.presentto.online/" />
     <meta property="og:type" content="website" />
@@ -11,6 +11,17 @@
     <meta property="og:title" content="Allerihe — Conocimiento en movimiento" />
     <meta property="og:description" content="Allerihe explora ciencia, historia, filosofía y cultura para convertir conocimiento en mejores preguntas." />
     <meta property="og:url" content="https://allerihe.presentto.online/" />
+    <script>
+      try {
+        const theme = localStorage.getItem('allerihe-theme');
+        const locale = localStorage.getItem('allerihe-locale');
+        document.documentElement.dataset.theme = theme === 'dark' ? 'dark' : 'light';
+        document.documentElement.lang = locale === 'en' ? 'en' : 'es';
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+        document.documentElement.lang = 'es';
+      }
+    </script>
     <title>Allerihe — Conocimiento en movimiento</title>
   </head>
   <body>

@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
+import { usePreferences } from '../i18n/Preferences.jsx';
 
 const sections = [
-  { id: 'arquitectura', label: 'La tensión' },
-  { id: 'praxis', label: 'Lucidus e Inanis' },
-  { id: 'practica', label: 'La práctica' },
-  { id: 'glosario', label: 'Glosario' },
+  { id: 'arquitectura', labelKey: 'readingTension' },
+  { id: 'praxis', labelKey: 'readingPraxes' },
+  { id: 'practica', labelKey: 'readingPractice' },
+  { id: 'glosario', labelKey: 'readingGlossary' },
 ];
 
 export function ReadingGuide() {
   const [activeSection, setActiveSection] = useState(sections[0].id);
   const [progress, setProgress] = useState(0);
+  const { t } = usePreferences();
 
   useEffect(() => {
     const observedSections = sections
@@ -50,10 +52,10 @@ export function ReadingGuide() {
 
   return (
     <div className="reading-guide">
-      <nav className="reading-guide-nav" aria-label="En esta página">
-        {sections.map(({ id, label }, index) => (
+      <nav className="reading-guide-nav" aria-label={t('readingGuide')}>
+        {sections.map(({ id, labelKey }, index) => (
           <a href={`#${id}`} key={id} aria-current={activeSection === id ? 'location' : undefined}>
-            <span>0{index + 1}</span>{label}
+            <span>0{index + 1}</span>{t(labelKey)}
           </a>
         ))}
       </nav>

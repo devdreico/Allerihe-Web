@@ -7,30 +7,32 @@ import { Hero } from '../components/Hero.jsx';
 import { CommunitySection, MissionSection } from '../components/EditorialSections.jsx';
 import { ProgressSection } from '../components/ProgressSection.jsx';
 import { ReadingGuide } from '../components/ReadingGuide.jsx';
-import { philosophy } from '../data/filosofia.js';
 import { siteRoutes } from '../data/routes.js';
+import { usePreferences } from '../i18n/Preferences.jsx';
 
-function PageHeading({ number, label, title, intro }) {
+function PageHeading({ number, labelKey, titleKey, introKey }) {
+  const { t } = usePreferences();
   return (
     <section className="page-heading page-wrap">
-      <Eyebrow>{number} / {label}</Eyebrow>
-      <h1>{title}</h1>
-      {intro && <p>{intro}</p>}
+      <Eyebrow>{number} / {t(labelKey)}</Eyebrow>
+      <h1>{t(titleKey)}</h1>
+      {introKey && <p>{t(introKey)}</p>}
     </section>
   );
 }
 
 function PageLinks() {
+  const { t, locale } = usePreferences();
   const links = siteRoutes.filter((route) => route.path !== '/');
 
   return (
     <section className="home-links page-wrap" aria-label="Explorar Allerihe">
-      <div className="home-links-heading"><Eyebrow>Explorar Allerihe</Eyebrow><span>06 DESTINOS</span></div>
+      <div className="home-links-heading"><Eyebrow>{t('exploreAllerihe')}</Eyebrow><span>06 {t('destinations').toLocaleUpperCase(locale)}</span></div>
       <div className="home-links-list">
         {links.map((route, index) => (
           <Link to={route.path} className="home-link-row" key={route.path}>
             <span className="home-link-index">0{index + 1}</span>
-            <span className="home-link-copy"><strong>{route.label}</strong><small>{route.homeSummary}</small></span>
+            <span className="home-link-copy"><strong>{t(route.labelKey)}</strong><small>{locale === 'en' ? route.homeSummaryEn : route.homeSummary}</small></span>
             <ArrowUpRight size={19} aria-hidden="true" />
           </Link>
         ))}
@@ -40,25 +42,26 @@ function PageLinks() {
 }
 
 export function HomePage() {
+  const { t } = usePreferences();
   return (
     <>
-      <a className="skip-hero" href="#contenido-inicio">Saltar la introducción</a>
+      <a className="skip-hero" href="#contenido-inicio">{t('skipHero')}</a>
       <Hero />
       <Header />
       <main>
         <section className="home-opening page-wrap" id="contenido-inicio" tabIndex={-1}>
-          <div className="opening-index"><Eyebrow>El punto de partida</Eyebrow><span>01 — 06</span></div>
+          <div className="opening-index"><Eyebrow>{t('homeOpeningLabel')}</Eyebrow><span>01 — 06</span></div>
           <div className="opening-copy">
-            <h1>El conocimiento es poder. <em>Pero acumularlo no basta.</em></h1>
-            <p>Con un cerebro limitado, acumular conocimiento dejó de ser lo más eficiente hace mucho. El beneficio del futuro está en delegar: en mentes instruidas en muchas áreas y en herramientas de inteligencia artificial autónomas, seguras y bien dirigidas.</p>
-            <Link className="opening-link" to="/manifiesto">Leer el manifiesto <ArrowDownRight size={18} aria-hidden="true" /></Link>
+            <h1>{t('homeOpeningTitle')}</h1>
+            <p>{t('homeOpeningCopy')}</p>
+            <Link className="opening-link" to="/manifiesto">{t('readManifesto')} <ArrowDownRight size={18} aria-hidden="true" /></Link>
           </div>
         </section>
         <section className="home-pullquote">
           <div className="page-wrap pullquote-inner">
-            <Eyebrow>Una pregunta más útil</Eyebrow>
-            <p>Si no podemos saberlo todo,<br /><em>¿cómo podemos pensar mejor?</em></p>
-            <span>ALLERIHE · 2026</span>
+            <Eyebrow>{t('homeQuoteLabel')}</Eyebrow>
+            <p>{t('homeQuote')}</p>
+            <span>{t('yearLabel')}</span>
           </div>
         </section>
         <PageLinks />
@@ -69,21 +72,22 @@ export function HomePage() {
 }
 
 export function ManifestoPage() {
+  const { t } = usePreferences();
   return (
     <article className="manifesto-page">
-      <PageHeading number="01" label="Manifiesto" title={<>El poder no está en saberlo todo.<br /><em>Está en saber qué hacer con lo que sabemos.</em></>} intro="Una idea sobre los límites de la mente, la inteligencia colectiva y el uso responsable de herramientas capaces de ampliar nuestra capacidad." />
+      <PageHeading number="01" labelKey="manifesto" titleKey="manifestoTitle" introKey="manifestoIntro" />
       <div className="manifesto-body page-wrap">
         <section className="manifesto-chapter">
-          <span className="chapter-index">I / EL LÍMITE</span>
-          <div><h2>Una mente brillante también tiene límites.</h2><p>El conocimiento es poder, pero nuestra atención, tiempo y memoria son finitos. Durante siglos, acumular información pareció una ventaja suficiente. Hoy, esa acumulación por sí sola ya no es la estrategia más eficiente.</p><p>La información crece más rápido de lo que una persona puede leerla, verificarla y conectarla. El reto no es almacenar más: es formar criterio para reconocer qué importa, dónde buscarlo y cómo ponerlo a trabajar.</p></div>
+          <span className="chapter-index">{t('chapterLimit')}</span>
+          <div><h2>{t('chapterLimitTitle')}</h2><p>{t('chapterLimitOne')}</p><p>{t('chapterLimitTwo')}</p></div>
         </section>
         <section className="manifesto-chapter">
-          <span className="chapter-index">II / LA DELEGACIÓN</span>
-          <div><h2>Delegar no es renunciar a pensar.</h2><p>El beneficio del futuro está en delegar tareas con intención. Personas instruidas en muchas áreas pueden conectar perspectivas; sistemas de inteligencia artificial pueden explorar, organizar y ejecutar trabajo a una escala distinta.</p><p>La herramienta no reemplaza el juicio. Lo vuelve más importante. Delegar bien requiere objetivos claros, verificación, límites explícitos y responsabilidad humana sobre las decisiones.</p></div>
+          <span className="chapter-index">{t('chapterDelegation')}</span>
+          <div><h2>{t('chapterDelegationTitle')}</h2><p>{t('chapterDelegationOne')}</p><p>{t('chapterDelegationTwo')}</p></div>
         </section>
         <section className="manifesto-chapter">
-          <span className="chapter-index">III / LA PRÁCTICA</span>
-          <div><h2>Más capacidad. Mejor dirección.</h2><p>Allerihe explora cómo convertir conocimiento en capacidad útil: aprender a través de disciplinas, hacer preguntas precisas, contrastar las respuestas y usar tecnología de forma autónoma y segura.</p><p>No se trata de correr detrás de cada avance. Se trata de entender suficiente para elegir qué merece nuestra atención y dirigir con responsabilidad aquello que decidimos delegar.</p><Link className="opening-link" to="/mision">Conocer la misión <ArrowUpRight size={17} aria-hidden="true" /></Link></div>
+          <span className="chapter-index">{t('chapterPractice')}</span>
+          <div><h2>{t('chapterPracticeTitle')}</h2><p>{t('chapterPracticeOne')}</p><p>{t('chapterPracticeTwo')}</p><Link className="opening-link" to="/mision">{t('learnMission')} <ArrowUpRight size={17} aria-hidden="true" /></Link></div>
         </section>
       </div>
     </article>
@@ -92,95 +96,114 @@ export function ManifestoPage() {
 
 export function PhilosophyPage() {
   const [query, setQuery] = useState('');
-  const visibleTerms = philosophy.glossary.filter(([term, definition]) =>
-    `${term} ${definition}`.toLocaleLowerCase('es').includes(query.toLocaleLowerCase('es')),
+  const { t } = usePreferences();
+  const glossaryKeys = [
+    ['glossaryTension', 'glossaryTensionDefinition'],
+    ['glossaryWitness', 'glossaryWitnessDefinition'],
+    ['glossaryCarrier', 'glossaryCarrierDefinition'],
+    ['glossaryDiamond', 'glossaryDiamondDefinition'],
+    ['glossaryPresence', 'glossaryPresenceDefinition'],
+    ['glossaryPraxis', 'glossaryPraxisDefinition'],
+    ['glossaryDimission', 'glossaryDimissionDefinition'],
+  ];
+  const praxisKeys = [
+    { id: 'lucidus', labelKey: 'experiencePriority', nameKey: 'praxisLucidus', descriptionKey: 'lucidDescription', emphasisKey: 'lucidEmphasis' },
+    { id: 'inanis', labelKey: 'tensionPriority', nameKey: 'praxisInanis', descriptionKey: 'inanisDescription', emphasisKey: 'inanisEmphasis' },
+  ];
+  const practiceKeys = [
+    ['practiceOneTitle', 'practiceOneCopy'],
+    ['practiceTwoTitle', 'practiceTwoCopy'],
+    ['practiceThreeTitle', 'practiceThreeCopy'],
+  ];
+  const visibleTerms = glossaryKeys.filter(([termKey, definitionKey]) =>
+    `${t(termKey)} ${t(definitionKey)}`.toLocaleLowerCase().includes(query.toLocaleLowerCase()),
   );
 
   return (
     <article className="philosophy-page">
       <PageHeading
         number="02"
-        label="Filosofía · Praxeología de la Tensión"
-        title={<>Existir es sostener <em>la contradicción.</em></>}
-        intro={philosophy.summary}
+        labelKey="philosophyPageLabel"
+        titleKey="philosophyPageTitle"
+        introKey="philosophySummary"
       />
       <div className="page-wrap">
         <ReadingGuide />
         <aside className="philosophy-notice" role="note">
-          <span>MARCO EDITORIAL</span>
-          <p>{philosophy.editorialNote}</p>
+          <span>{t('editorialFrame')}</span>
+          <p>{t('philosophyNotice')}</p>
         </aside>
         <section className="philosophy-thesis">
-          <Eyebrow>La propuesta, en una idea</Eyebrow>
-          <p>{philosophy.thesis}</p>
-          <span>Resumen editorial del manuscrito proporcionado por Allerihe</span>
+          <Eyebrow>{t('proposalInOneIdea')}</Eyebrow>
+          <p>{t('philosophyThesis')}</p>
+          <span>{t('sourceManuscript')}</span>
         </section>
         <section className="philosophy-section" id="arquitectura">
           <div className="philosophy-section-heading">
-            <Eyebrow>01 / Arquitectura de la tensión</Eyebrow>
-            <h2>Dos polos. <em>Una experiencia.</em></h2>
-            <p>El modelo organiza la experiencia alrededor de una relación propuesta entre quien observa y el cuerpo que porta esa experiencia.</p>
+            <Eyebrow>{t('tensionArchitecture')}</Eyebrow>
+            <h2>{t('twoPoles')}</h2>
+            <p>{t('architectureCopy')}</p>
           </div>
-          <div className="tension-model" aria-label="Modelo propuesto: testigo activo y portador rodean el punto de presencia, atravesado por dimensiones subjetiva y lógica">
-            <div className="model-node model-witness"><span>TESTIGO ACTIVO</span><strong>Consciencia</strong></div>
-            <div className="model-node model-subjective"><span>DIMENSIÓN</span><strong>Subjetiva</strong></div>
-            <div className="model-node model-presence"><span>CENTRO</span><strong>Punto de presencia</strong></div>
-            <div className="model-node model-logical"><span>DIMENSIÓN</span><strong>Lógica</strong></div>
-            <div className="model-node model-carrier"><span>PORTADOR</span><strong>Cuerpo</strong></div>
+          <div className="tension-model" aria-label={t('modelDiagramLabel')}>
+            <div className="model-node model-witness"><span>{t('activeWitness')}</span><strong>{t('consciousness')}</strong></div>
+            <div className="model-node model-subjective"><span>{t('dimension')}</span><strong>{t('subjective')}</strong></div>
+            <div className="model-node model-presence"><span>{t('center')}</span><strong>{t('presencePoint')}</strong></div>
+            <div className="model-node model-logical"><span>{t('dimension')}</span><strong>{t('logical')}</strong></div>
+            <div className="model-node model-carrier"><span>{t('carrier')}</span><strong>{t('body')}</strong></div>
           </div>
-          <p className="philosophy-caption">El rombo y sus términos pertenecen al marco conceptual del manuscrito; no son un modelo científico establecido.</p>
+          <p className="philosophy-caption">{t('modelDisclaimer')}</p>
         </section>
         <section className="philosophy-section praxis-section" id="praxis">
           <div className="philosophy-section-heading">
-            <Eyebrow>02 / Dos modos de vivir la relación</Eyebrow>
-            <h2>Lucidus e Inanis no son <em>un juicio moral.</em></h2>
-            <p>En el texto funcionan como nombres para dos prioridades dentro de una tensión, no como diagnósticos ni categorías clínicas.</p>
+            <Eyebrow>{t('twoWays')}</Eyebrow>
+            <h2>{t('lucidusInanisTitle')}</h2>
+            <p>{t('praxisIntro')}</p>
           </div>
           <div className="praxis-grid">
-            {philosophy.praxes.map((praxis) => (
+            {praxisKeys.map((praxis) => (
               <article className={`praxis-panel praxis-${praxis.id}`} key={praxis.id}>
-                <span>{praxis.label}</span>
-                <h3>{praxis.name}</h3>
-                <p>{praxis.description}</p>
-                <small>{praxis.emphasis}</small>
+                <span>{t(praxis.labelKey)}</span>
+                <h3>{t(praxis.nameKey)}</h3>
+                <p>{t(praxis.descriptionKey)}</p>
+                <small>{t(praxis.emphasisKey)}</small>
               </article>
             ))}
           </div>
         </section>
         <section className="philosophy-section" id="practica">
           <div className="philosophy-section-heading">
-            <Eyebrow>03 / La práctica</Eyebrow>
-            <h2>Del propósito al <em>presente.</em></h2>
+            <Eyebrow>{t('practiceLabel')}</Eyebrow>
+            <h2>{t('practiceTitle')}</h2>
           </div>
           <ol className="practice-list">
-            {philosophy.practice.map((step, index) => (
-              <li key={step.title}>
+            {practiceKeys.map(([titleKey, descriptionKey], index) => (
+              <li key={titleKey}>
                 <span>0{index + 1}</span>
-                <div><h3>{step.title}</h3><p>{step.description}</p></div>
+                <div><h3>{t(titleKey)}</h3><p>{t(descriptionKey)}</p></div>
               </li>
             ))}
           </ol>
         </section>
         <section className="philosophy-section glossary-section" id="glosario">
           <div className="philosophy-section-heading">
-            <Eyebrow>04 / Glosario mínimo</Eyebrow>
-            <h2>Palabras propias <em>del modelo.</em></h2>
+            <Eyebrow>{t('glossaryLabel')}</Eyebrow>
+            <h2>{t('glossaryTitle')}</h2>
           </div>
           <label className="glossary-search">
-            <span>Buscar un concepto</span>
-            <input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Ej. presencia" />
+            <span>{t('searchConcept')}</span>
+            <input type="search" aria-label={t('searchConcept')} value={query} onChange={(event) => setQuery(event.target.value)} placeholder={t('glossaryPlaceholder')} />
           </label>
-          <p className="glossary-result-count" aria-live="polite">{visibleTerms.length} {visibleTerms.length === 1 ? 'término' : 'términos'}</p>
+          <p className="glossary-result-count" aria-live="polite">{visibleTerms.length} {visibleTerms.length === 1 ? t('term') : t('terms')}</p>
           <dl className="philosophy-glossary">
-            {visibleTerms.map(([term, definition]) => (
-              <div key={term}><dt>{term}</dt><dd>{definition}</dd></div>
+            {visibleTerms.map(([termKey, definitionKey]) => (
+              <div key={termKey}><dt>{t(termKey)}</dt><dd>{t(definitionKey)}</dd></div>
             ))}
           </dl>
-          {visibleTerms.length === 0 && <p className="glossary-empty">No hay conceptos que coincidan. Prueba otra palabra.</p>}
+          {visibleTerms.length === 0 && <p className="glossary-empty">{t('noTerms')}</p>}
         </section>
         <aside className="philosophy-open-questions">
-          <Eyebrow>Para seguir pensando</Eyebrow>
-          <p>El manuscrito conecta su propuesta con afirmaciones sobre evolución, física, información y consciencia. Esas conexiones necesitan fuentes completas y revisión independiente antes de presentarse como hechos. La pregunta filosófica queda abierta; la evidencia también debe quedar a la vista.</p>
+          <Eyebrow>{t('furtherQuestions')}</Eyebrow>
+          <p>{t('openQuestionsCopy')}</p>
         </aside>
       </div>
     </article>
@@ -188,17 +211,18 @@ export function PhilosophyPage() {
 }
 
 export function MissionPage() {
+  const { t } = usePreferences();
   return (
     <>
-      <PageHeading number="02" label="Misión" title={<>Conocimiento para <em>entender y actuar.</em></>} intro="Allerihe divulga para conectar ideas, poner a prueba explicaciones y acercar herramientas que ayuden a pensar con más claridad." />
+      <PageHeading number="02" labelKey="mission" titleKey="missionPageTitle" introKey="missionPageIntro" />
       <MissionSection />
-      <section className="mission-fields page-wrap"><Eyebrow>Territorios de exploración</Eyebrow><p>Cultura general · Ciencia y técnica · Historia · Geopolítica · Política · Filosofía · Inteligencia artificial</p></section>
+      <section className="mission-fields page-wrap"><Eyebrow>{t('explorationAreas')}</Eyebrow><p>{t('topics')}</p></section>
     </>
   );
 }
 
 export function InitiativesPage() {
-  return <><PageHeading number="03" label="Iniciativas" title={<>El trabajo, <em>a la vista.</em></>} intro="Proyectos en desarrollo, con su estado y avance publicados de forma transparente." /><ProgressSection /></>;
+  return <><PageHeading number="03" labelKey="initiatives" titleKey="initiativesTitle" introKey="initiativesIntro" /><ProgressSection /></>;
 }
 
 export function CommunityPage() {
@@ -206,18 +230,20 @@ export function CommunityPage() {
 }
 
 export function AcademyPage() {
+  const { t } = usePreferences();
   return (
     <article className="academy-page">
-      <PageHeading number="05" label="Academia" title={<>Quonceptory<em>.</em></>} intro="GRUPO REAL PRIVADO DE CONOCIMIENTO y exploración universal." />
+      <PageHeading number="05" labelKey="academy" titleKey="academyPageTitle" introKey="academyPageIntro" />
       <section className="academy-detail page-wrap">
-        <div className="academy-detail-copy"><Eyebrow>Aprendizaje en común</Eyebrow><h2>Un lugar para explorar <em>más allá de una sola disciplina.</em></h2><p>Quonceptory es la academia de Allerihe: un espacio para investigar, contrastar perspectivas y construir conocimiento con otras personas. La curiosidad abre el camino; el rigor nos ayuda a recorrerlo.</p><a className="academy-link" href="https://quonceptory.presentto.online" target="_blank" rel="noreferrer">Visitar Quonceptory <ArrowUpRight size={17} aria-hidden="true" /></a></div>
-        <div className="academy-seal" aria-hidden="true"><span>GRUPO REAL</span><strong>Q·P</strong><span>EXPLORAR · COMPRENDER</span></div>
+        <div className="academy-detail-copy"><Eyebrow>{t('academyLearning')}</Eyebrow><h2>{t('academySubhead')}</h2><p>{t('academyBody')}</p><a className="academy-link" href="https://quonceptory.presentto.online" target="_blank" rel="noreferrer">{t('academyLink')} <ArrowUpRight size={17} aria-hidden="true" /></a></div>
+        <div className="academy-seal" aria-hidden="true"><span>{t('academySealName')}</span><strong>Q·P</strong><span>{t('academyDescription')}</span></div>
       </section>
-      <section className="academy-reference page-wrap"><Eyebrow>Referencia académica</Eyebrow><p>Grupo real privado de conocimiento y exploración universal</p><a href="https://quonceptory.presentto.online" target="_blank" rel="noreferrer">quonceptory.presentto.online <ArrowUpRight size={15} aria-hidden="true" /></a></section>
+      <section className="academy-reference page-wrap"><Eyebrow>{t('academyReference')}</Eyebrow><p>{t('academyFullName')}</p><a href="https://quonceptory.presentto.online" target="_blank" rel="noreferrer">quonceptory.presentto.online <ArrowUpRight size={15} aria-hidden="true" /></a></section>
     </article>
   );
 }
 
 export function NotFoundPage() {
-  return <section className="not-found page-wrap"><Eyebrow>404 / Fuera de mapa</Eyebrow><h1>Esta ruta todavía <em>no existe.</em></h1><Link className="opening-link" to="/">Volver al inicio <ArrowUpRight size={17} aria-hidden="true" /></Link></section>;
+  const { t } = usePreferences();
+  return <section className="not-found page-wrap"><Eyebrow>{t('notFoundLabel')}</Eyebrow><h1>{t('notFoundTitle')}</h1><Link className="opening-link" to="/">{t('backHome')} <ArrowUpRight size={17} aria-hidden="true" /></Link></section>;
 }

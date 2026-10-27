@@ -1,6 +1,6 @@
 export const projects = [
-  { id: 'mapa-conocimiento', name: 'Mapa de conocimiento', category: 'Sistema editorial', progress: 0, status: 'En definición', updatedAt: null, sources: [] },
-  { id: 'praxeologia-tension', name: 'Video 0 · Praxeología de la Tensión', category: 'Investigación', progress: 0, status: 'En definición', updatedAt: null, sources: [] },
-  { id: 'archivo-referencias', name: 'Archivo de ideas y referencias', category: 'Conocimiento abierto', progress: 0, status: 'En definición', updatedAt: null, sources: [] },
-  { id: 'grupo-real', name: 'Grupo real privado', category: 'Comunidad académica', progress: 0, status: 'En definición', updatedAt: null, sources: [] },
+  { id: 'mapa-conocimiento', name: 'Mapa de conocimiento', nameKey: 'projectMap', category: 'Sistema editorial', categoryKey: 'projectEditorial', progress: 0, status: 'En definición', statusKey: 'projectStatus', updatedAt: null, sources: [] },
+  { id: 'praxeologia-tension', name: 'Video 0 · Praxeología de la Tensión', nameKey: 'projectTension', category: 'Investigación', categoryKey: 'projectResearch', progress: 0, status: 'En definición', statusKey: 'projectStatus', updatedAt: null, sources: [] },
+  { id: 'archivo-referencias', name: 'Archivo de ideas y referencias', nameKey: 'projectArchive', category: 'Conocimiento abierto', categoryKey: 'projectOpenKnowledge', progress: 0, status: 'En definición', statusKey: 'projectStatus', updatedAt: null, sources: [] },
+  { id: 'grupo-real', name: 'Grupo real privado', nameKey: 'projectPrivateGroup', category: 'Comunidad académica', categoryKey: 'projectCommunity', progress: 0, status: 'En definición', statusKey: 'projectStatus', updatedAt: null, sources: [] },
 ];
