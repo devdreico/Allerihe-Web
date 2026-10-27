@@ -523,3 +523,226 @@ h1 em, h2 em, .academy-seal strong, .easter-dialog p, .mission-fields > p,
   .scroll-hero-logo { display: none; }
   .phrase-word { opacity: 1 !important; transform: none !important; }
 }
+
+.philosophy-page .page-heading { padding-bottom: 48px; }
+.philosophy-page .page-heading h1 { max-width: 1000px; font-size: clamp(48px, 7.3vw, 94px); }
+.philosophy-page .page-heading h1 em { color: var(--red); }
+.philosophy-notice {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 20px;
+  padding: 22px 24px;
+  border: 1px solid rgb(255 255 255 / 90%);
+  border-left: 3px solid #9a5a36;
+  border-radius: 12px;
+  background: rgb(255 250 240 / 76%);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.philosophy-notice > span { color: #854c2e; font-size: 10px; font-weight: 650; letter-spacing: .08em; }
+.philosophy-notice p { margin: 0; color: #424b50; font-size: 13px; line-height: 1.75; }
+.philosophy-thesis {
+  position: relative;
+  margin-block: 42px 25px;
+  padding: clamp(28px, 5vw, 66px);
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  background: linear-gradient(130deg, rgb(255 255 255 / 82%), rgb(255 255 255 / 48%));
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(22px) saturate(135%);
+  -webkit-backdrop-filter: blur(22px) saturate(135%);
+}
+.philosophy-thesis::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 5px;
+  height: 100%;
+  background: linear-gradient(var(--blue), var(--acid), var(--red));
+  content: '';
+}
+.philosophy-thesis > p {
+  max-width: 1000px;
+  margin: 26px 0 28px;
+  font-size: clamp(27px, 4.2vw, 52px);
+  line-height: 1.16;
+  font-weight: 450;
+  letter-spacing: 0;
+}
+.philosophy-thesis > span { color: var(--muted); font-size: 11px; }
+.philosophy-section { padding-block: clamp(64px, 9vw, 116px); border-bottom: 1px solid rgb(105 126 139 / 20%); }
+.philosophy-section-heading { max-width: 790px; margin-bottom: 42px; }
+.philosophy-section-heading h2 { margin: 21px 0 15px; font-size: clamp(37px, 5.4vw, 68px); line-height: 1.02; font-weight: 500; }
+.philosophy-section-heading h2 em { color: var(--blue); }
+.philosophy-section-heading > p { max-width: 650px; margin: 0; color: #52616a; font-size: 14px; line-height: 1.8; }
+.tension-model {
+  position: relative;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 22px 0;
+  display: grid;
+  grid-template-areas: '. witness .' 'subjective presence logical' '. carrier .';
+  grid-template-columns: 1fr 1.14fr 1fr;
+  gap: 18px;
+  isolation: isolate;
+}
+.tension-model::before {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  width: min(38vw, 310px);
+  aspect-ratio: 1;
+  border: 1px solid rgb(54 89 167 / 34%);
+  border-radius: 8px;
+  background: linear-gradient(145deg, rgb(255 255 255 / 18%), rgb(215 238 114 / 11%));
+  transform: translate(-50%, -50%) rotate(45deg);
+  content: '';
+}
+.model-node {
+  min-height: 106px;
+  padding: 19px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgb(255 255 255 / 88%);
+  border-radius: 13px;
+  background: rgb(250 252 252 / 70%);
+  box-shadow: 0 14px 36px rgb(34 58 76 / 8%), inset 0 1px 0 white;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.model-node > span { color: #637785; font-size: 9px; font-weight: 650; letter-spacing: .08em; }
+.model-node > strong { font-size: clamp(14px, 1.7vw, 19px); font-weight: 550; }
+.model-witness { grid-area: witness; justify-self: center; width: min(100%, 290px); border-top: 2px solid #7086b3; }
+.model-subjective { grid-area: subjective; border-left: 2px solid #8e785f; }
+.model-presence { grid-area: presence; align-self: center; min-height: 135px; border-color: rgb(154 176 74 / 60%); background: rgb(244 249 221 / 78%); text-align: center; }
+.model-logical { grid-area: logical; border-right: 2px solid #607c8a; }
+.model-carrier { grid-area: carrier; justify-self: center; width: min(100%, 290px); border-bottom: 2px solid #b5705e; }
+.philosophy-caption { max-width: 700px; margin: 22px auto 0; color: #687780; font-size: 11px; line-height: 1.7; text-align: center; }
+.praxis-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.praxis-panel {
+  min-height: 300px;
+  padding: clamp(24px, 3.5vw, 42px);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  background: var(--glass-fill);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(20px) saturate(130%);
+  -webkit-backdrop-filter: blur(20px) saturate(130%);
+}
+.praxis-panel > span { font-size: 9px; font-weight: 650; letter-spacing: .07em; }
+.praxis-panel h3 { margin: 37px 0 13px; font-size: clamp(30px, 4vw, 48px); line-height: 1; font-weight: 500; }
+.praxis-panel p { max-width: 470px; margin: 0; color: #4f5c64; font-size: 13px; line-height: 1.8; }
+.praxis-panel small { display: inline-block; margin-top: 25px; padding: 8px 11px; border: 1px solid rgb(52 73 83 / 14%); border-radius: 999px; background: rgb(255 255 255 / 44%); font-size: 10px; }
+.praxis-lucidus { border-top: 3px solid #6d8d45; background: linear-gradient(145deg, rgb(242 249 220 / 84%), rgb(255 255 255 / 54%)); }
+.praxis-lucidus > span { color: #506b30; }
+.praxis-inanis { border-top: 3px solid #a34a43; background: linear-gradient(145deg, rgb(250 235 229 / 82%), rgb(255 255 255 / 54%)); }
+.praxis-inanis > span { color: #8d403a; }
+.practice-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid rgb(105 126 139 / 24%); }
+.practice-list li { min-height: 104px; padding: 20px 10px; display: grid; grid-template-columns: 70px 1fr; gap: 20px; border-bottom: 1px solid rgb(105 126 139 / 24%); }
+.practice-list li > span { color: var(--red); font-size: 10px; font-weight: 650; }
+.practice-list h3 { margin: 0 0 8px; font-size: 17px; font-weight: 550; }
+.practice-list p { max-width: 710px; margin: 0; color: #53626b; font-size: 13px; line-height: 1.75; }
+.glossary-search { max-width: 530px; display: flex; flex-direction: column; gap: 8px; color: #5b6d77; font-size: 10px; font-weight: 600; }
+.glossary-search input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 15px;
+  border: 1px solid rgb(255 255 255 / 92%);
+  border-radius: 10px;
+  background: rgb(255 255 255 / 64%);
+  box-shadow: inset 0 1px 2px rgb(33 55 68 / 4%);
+}
+.glossary-search input::placeholder { color: #71818a; }
+.glossary-result-count { margin: 14px 0 8px; color: #687780; font-size: 10px; }
+.philosophy-glossary { margin: 0; border-top: 1px solid rgb(105 126 139 / 24%); }
+.philosophy-glossary > div { padding: 17px 12px; display: grid; grid-template-columns: minmax(170px, .7fr) 1.3fr; gap: 18px; border-bottom: 1px solid rgb(105 126 139 / 24%); }
+.philosophy-glossary dt { font-size: 13px; font-weight: 600; }
+.philosophy-glossary dd { margin: 0; color: #53626b; font-size: 12px; line-height: 1.7; }
+.glossary-empty { padding: 25px 0; color: #53626b; font-size: 13px; }
+.philosophy-open-questions {
+  margin-block: 55px 110px;
+  padding: 27px 30px;
+  border: 1px solid rgb(255 255 255 / 84%);
+  border-radius: 14px;
+  background: rgb(222 233 240 / 54%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 82%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.philosophy-open-questions p { max-width: 900px; margin: 14px 0 0; color: #465761; font-size: 12px; line-height: 1.8; }
+.philosophy-page .page-heading, .philosophy-page .philosophy-section { scroll-margin-top: 96px; }
+.skip-hero {
+  position: fixed;
+  z-index: 100;
+  top: 12px;
+  left: 12px;
+  padding: 12px 16px;
+  border: 1px solid var(--glass-border);
+  border-radius: 9px;
+  background: var(--glass-fill-strong);
+  box-shadow: var(--glass-shadow);
+  transform: translateY(calc(-100% - 18px));
+}
+.skip-hero:focus { transform: translateY(0); }
+.reading-guide {
+  position: sticky;
+  z-index: 10;
+  top: 84px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  border-radius: 13px;
+  background: rgb(246 249 250 / 77%);
+  box-shadow: 0 10px 32px rgb(33 55 68 / 7%), inset 0 1px 0 white;
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+}
+.reading-guide-nav { min-height: 53px; padding-inline: 8px; display: flex; align-items: center; justify-content: space-around; gap: 5px; }
+.reading-guide-nav a { min-height: 39px; padding: 0 12px; display: inline-flex; align-items: center; gap: 8px; border-radius: 8px; color: #53636c; font-size: 11px; white-space: nowrap; transition: background .2s ease, color .2s ease; }
+.reading-guide-nav a > span { color: #788790; font-size: 9px; }
+.reading-guide-nav a[aria-current='location'] { background: rgb(255 255 255 / 78%); color: var(--ink); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 88%); }
+.reading-guide-nav a[aria-current='location'] > span { color: var(--red); }
+.reading-progress { height: 2px; overflow: hidden; background: rgb(96 117 131 / 13%); }
+.reading-progress > span { height: 100%; display: block; transform-origin: left center; background: linear-gradient(90deg, var(--blue), #789247, var(--red)); }
+.philosophy-page .philosophy-section[id] { scroll-margin-top: 162px; }
+
+@media (max-width: 620px) {
+  .reading-guide { top: 70px; margin-inline: -1px; border-radius: 10px; }
+  .reading-guide-nav { min-height: 48px; justify-content: flex-start; overflow-x: auto; scrollbar-width: thin; }
+  .reading-guide-nav a { min-height: 35px; padding-inline: 10px; gap: 6px; font-size: 10px; }
+  .philosophy-page .philosophy-section[id] { scroll-margin-top: 124px; }
+  .philosophy-page .page-heading { padding-bottom: 31px; }
+  .philosophy-page .page-heading h1 { font-size: clamp(43px, 11vw, 62px); }
+  .philosophy-notice { grid-template-columns: 1fr; gap: 9px; padding: 17px; }
+  .philosophy-notice p { font-size: 12px; }
+  .philosophy-thesis { margin-top: 25px; padding: 25px 21px; border-radius: 15px; }
+  .philosophy-thesis > p { margin-block: 21px; font-size: 29px; }
+  .philosophy-thesis > span { font-size: 10px; }
+  .philosophy-section { padding-block: 58px; }
+  .philosophy-section-heading { margin-bottom: 29px; }
+  .philosophy-section-heading h2 { font-size: 39px; }
+  .philosophy-section-heading > p { font-size: 12px; }
+  .tension-model { grid-template-areas: '. witness .' 'subjective presence logical' '. carrier .'; grid-template-columns: .9fr 1.15fr .9fr; gap: 8px; }
+  .tension-model::before { width: 47vw; }
+  .model-node { min-height: 83px; padding: 9px; gap: 6px; border-radius: 9px; }
+  .model-node > span { font-size: 7px; }
+  .model-node > strong { font-size: 11px; line-height: 1.3; }
+  .model-presence { min-height: 101px; }
+  .philosophy-caption { font-size: 10px; }
+  .praxis-grid { grid-template-columns: 1fr; gap: 12px; }
+  .praxis-panel { min-height: 0; padding: 24px; border-radius: 14px; }
+  .praxis-panel h3 { margin-top: 25px; font-size: 39px; }
+  .praxis-panel p { font-size: 12px; }
+  .practice-list li { grid-template-columns: 35px 1fr; gap: 9px; padding-inline: 3px; }
+  .practice-list h3 { font-size: 15px; }
+  .practice-list p { font-size: 12px; }
+  .philosophy-glossary > div { grid-template-columns: 1fr; gap: 5px; padding-inline: 5px; }
+  .philosophy-glossary dt { font-size: 12px; }
+  .philosophy-glossary dd { font-size: 11px; }
+  .philosophy-open-questions { margin-block: 38px 75px; padding: 20px; }
+}

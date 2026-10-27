@@ -2,15 +2,9 @@ import { ChevronDown } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import logo from '../../assets/allerihe-logo.png';
+import { siteRoutes } from '../data/routes.js';
 
-export const navigation = [
-  { label: 'Inicio', to: '/' },
-  { label: 'Manifiesto', to: '/manifiesto' },
-  { label: 'Misión', to: '/mision' },
-  { label: 'Iniciativas', to: '/iniciativas' },
-  { label: 'Comunidad', to: '/comunidad' },
-  { label: 'Quonceptory', to: '/academia' },
-];
+const navigation = siteRoutes.filter((route) => route.showInNavigation);
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,11 +32,11 @@ export function Header() {
           <img src={logo} alt="" /><span>ALLERIHE</span><ChevronDown size={15} className={isOpen ? 'chevron-open' : ''} aria-hidden="true" />
         </button>
         <nav className="main-nav" aria-label="Navegación principal">
-          {navigation.slice(1).map((item) => <NavLink to={item.to} key={item.to}>{item.label}</NavLink>)}
+          {navigation.map((item) => <NavLink to={item.path} key={item.path}>{item.label}</NavLink>)}
         </nav>
-        <nav className={`mobile-nav${isOpen ? ' is-open' : ''}`} id="mobile-navigation" aria-label="Navegación móvil" aria-hidden={!isOpen}>
-          {navigation.map((item, index) => (
-            <NavLink to={item.to} key={item.to} onClick={() => setIsOpen(false)}>
+        <nav className={`mobile-nav${isOpen ? ' is-open' : ''}`} id="mobile-navigation" aria-label="Navegación móvil" aria-hidden={!isOpen} inert={!isOpen}>
+          {siteRoutes.map((item, index) => (
+            <NavLink to={item.path} key={item.path} onClick={() => setIsOpen(false)}>
               <span>0{index + 1}</span>{item.label}
             </NavLink>
           ))}

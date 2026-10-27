@@ -1,6 +1,7 @@
 export const brand = {
   name: 'Allerihe',
   uppercaseName: 'ALLERIHE',
+  siteUrl: 'https://allerihe.presentto.online',
   strapline: 'Conocimiento en movimiento',
   planned: 'Febrero de 2025',
   formalDevelopment: 'Octubre de 2026',

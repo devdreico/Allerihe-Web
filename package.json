@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "validate:content": "node scripts/validate-content.mjs",
-    "check": "npm run validate:content && npm run build"
+    "validate:routes": "node scripts/validate-routes.mjs",
+    "check": "npm run validate:content && npm run build && npm run validate:routes"
   },
   "dependencies": {
     "@fontsource-variable/ibm-plex-sans": "^5.3.0",

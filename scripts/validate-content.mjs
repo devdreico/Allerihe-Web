@@ -1,7 +1,11 @@
 import assert from 'node:assert/strict';
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { brand, projectTimeline } from '../src/data/brand.js';
+import { philosophy } from '../src/data/filosofia.js';
 import { manifesto } from '../src/data/manifesto.js';
 import { projects } from '../src/data/projects.js';
+import { siteRoutes } from '../src/data/routes.js';
 
 const unique = (values) => new Set(values).size === values.length;
 const validSource = (source) => {
@@ -16,6 +20,9 @@ assert.ok(brand.socialProfiles.length > 0);
 assert.ok(brand.socialProfiles.every((profile) => new URL(profile.url).protocol === 'https:'));
 assert.ok(brand.socialProfiles.every((profile) => new URL(profile.url).pathname.includes('allerihe') || profile.url.includes('@allerihe')));
 assert.ok(unique(projectTimeline.map((milestone) => milestone.id)));
+assert.ok(unique(siteRoutes.map((route) => route.path)), 'Las rutas deben ser únicas.');
+assert.ok(siteRoutes.every((route) => route.title && route.description), 'Cada ruta necesita metadatos propios.');
+assert.ok(siteRoutes.some((route) => route.path === '/filosofia'), 'Falta la ruta de Filosofía.');
 assert.ok(unique(projects.map((project) => project.id)), 'Los proyectos necesitan identificadores únicos.');
 
 for (const project of projects) {
@@ -33,4 +40,11 @@ for (const chapter of manifesto.chapters) {
   chapter.sources.forEach(validSource);
 }
 
-console.log(`Contenido válido: ${manifesto.chapters.length} capítulos, ${projects.length} iniciativas y ${brand.topics.length} áreas.`);
+assert.equal(philosophy.contentType, 'editorial-position');
+assert.ok(existsSync(resolve(philosophy.source)), `No se encuentra el manuscrito fuente: ${philosophy.source}`);
+assert.ok(philosophy.summary && philosophy.editorialNote && philosophy.thesis);
+assert.ok(Array.isArray(philosophy.sources), 'La página de filosofía necesita declarar sus fuentes.');
+assert.ok(unique(philosophy.glossary.map(([term]) => term)), 'El glosario necesita términos únicos.');
+philosophy.sources.forEach(validSource);
+
+console.log(`Contenido válido: ${manifesto.chapters.length} capítulos, ${projects.length} iniciativas, ${brand.topics.length} áreas y ${philosophy.glossary.length} conceptos filosóficos.`);

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Footer } from '../components/Footer.jsx';
@@ -5,6 +6,9 @@ import { Header, Eyebrow } from '../components/Header.jsx';
 import { Hero } from '../components/Hero.jsx';
 import { CommunitySection, MissionSection } from '../components/EditorialSections.jsx';
 import { ProgressSection } from '../components/ProgressSection.jsx';
+import { ReadingGuide } from '../components/ReadingGuide.jsx';
+import { philosophy } from '../data/filosofia.js';
+import { siteRoutes } from '../data/routes.js';
 
 function PageHeading({ number, label, title, intro }) {
   return (
@@ -17,22 +21,16 @@ function PageHeading({ number, label, title, intro }) {
 }
 
 function PageLinks() {
-  const links = [
-    ['Manifiesto', '/manifiesto', 'Una tesis sobre el conocimiento y el futuro.'],
-    ['Misión', '/mision', 'La razón de existir de Allerihe.'],
-    ['Iniciativas', '/iniciativas', 'Ideas abiertas, trabajo en curso.'],
-    ['Comunidad', '/comunidad', 'La conversación, en distintos espacios.'],
-    ['Quonceptory', '/academia', 'Exploración y aprendizaje compartido.'],
-  ];
+  const links = siteRoutes.filter((route) => route.path !== '/');
 
   return (
     <section className="home-links page-wrap" aria-label="Explorar Allerihe">
-      <div className="home-links-heading"><Eyebrow>Explorar Allerihe</Eyebrow><span>05 DESTINOS</span></div>
+      <div className="home-links-heading"><Eyebrow>Explorar Allerihe</Eyebrow><span>06 DESTINOS</span></div>
       <div className="home-links-list">
-        {links.map(([label, to, copy], index) => (
-          <Link to={to} className="home-link-row" key={to}>
+        {links.map((route, index) => (
+          <Link to={route.path} className="home-link-row" key={route.path}>
             <span className="home-link-index">0{index + 1}</span>
-            <span className="home-link-copy"><strong>{label}</strong><small>{copy}</small></span>
+            <span className="home-link-copy"><strong>{route.label}</strong><small>{route.homeSummary}</small></span>
             <ArrowUpRight size={19} aria-hidden="true" />
           </Link>
         ))}
@@ -44,10 +42,11 @@ function PageLinks() {
 export function HomePage() {
   return (
     <>
+      <a className="skip-hero" href="#contenido-inicio">Saltar la introducción</a>
       <Hero />
       <Header />
       <main>
-        <section className="home-opening page-wrap">
+        <section className="home-opening page-wrap" id="contenido-inicio" tabIndex={-1}>
           <div className="opening-index"><Eyebrow>El punto de partida</Eyebrow><span>01 — 06</span></div>
           <div className="opening-copy">
             <h1>El conocimiento es poder. <em>Pero acumularlo no basta.</em></h1>
@@ -86,6 +85,103 @@ export function ManifestoPage() {
           <span className="chapter-index">III / LA PRÁCTICA</span>
           <div><h2>Más capacidad. Mejor dirección.</h2><p>Allerihe explora cómo convertir conocimiento en capacidad útil: aprender a través de disciplinas, hacer preguntas precisas, contrastar las respuestas y usar tecnología de forma autónoma y segura.</p><p>No se trata de correr detrás de cada avance. Se trata de entender suficiente para elegir qué merece nuestra atención y dirigir con responsabilidad aquello que decidimos delegar.</p><Link className="opening-link" to="/mision">Conocer la misión <ArrowUpRight size={17} aria-hidden="true" /></Link></div>
         </section>
+      </div>
+    </article>
+  );
+}
+
+export function PhilosophyPage() {
+  const [query, setQuery] = useState('');
+  const visibleTerms = philosophy.glossary.filter(([term, definition]) =>
+    `${term} ${definition}`.toLocaleLowerCase('es').includes(query.toLocaleLowerCase('es')),
+  );
+
+  return (
+    <article className="philosophy-page">
+      <PageHeading
+        number="02"
+        label="Filosofía · Praxeología de la Tensión"
+        title={<>Existir es sostener <em>la contradicción.</em></>}
+        intro={philosophy.summary}
+      />
+      <div className="page-wrap">
+        <ReadingGuide />
+        <aside className="philosophy-notice" role="note">
+          <span>MARCO EDITORIAL</span>
+          <p>{philosophy.editorialNote}</p>
+        </aside>
+        <section className="philosophy-thesis">
+          <Eyebrow>La propuesta, en una idea</Eyebrow>
+          <p>{philosophy.thesis}</p>
+          <span>Resumen editorial del manuscrito proporcionado por Allerihe</span>
+        </section>
+        <section className="philosophy-section" id="arquitectura">
+          <div className="philosophy-section-heading">
+            <Eyebrow>01 / Arquitectura de la tensión</Eyebrow>
+            <h2>Dos polos. <em>Una experiencia.</em></h2>
+            <p>El modelo organiza la experiencia alrededor de una relación propuesta entre quien observa y el cuerpo que porta esa experiencia.</p>
+          </div>
+          <div className="tension-model" aria-label="Modelo propuesto: testigo activo y portador rodean el punto de presencia, atravesado por dimensiones subjetiva y lógica">
+            <div className="model-node model-witness"><span>TESTIGO ACTIVO</span><strong>Consciencia</strong></div>
+            <div className="model-node model-subjective"><span>DIMENSIÓN</span><strong>Subjetiva</strong></div>
+            <div className="model-node model-presence"><span>CENTRO</span><strong>Punto de presencia</strong></div>
+            <div className="model-node model-logical"><span>DIMENSIÓN</span><strong>Lógica</strong></div>
+            <div className="model-node model-carrier"><span>PORTADOR</span><strong>Cuerpo</strong></div>
+          </div>
+          <p className="philosophy-caption">El rombo y sus términos pertenecen al marco conceptual del manuscrito; no son un modelo científico establecido.</p>
+        </section>
+        <section className="philosophy-section praxis-section" id="praxis">
+          <div className="philosophy-section-heading">
+            <Eyebrow>02 / Dos modos de vivir la relación</Eyebrow>
+            <h2>Lucidus e Inanis no son <em>un juicio moral.</em></h2>
+            <p>En el texto funcionan como nombres para dos prioridades dentro de una tensión, no como diagnósticos ni categorías clínicas.</p>
+          </div>
+          <div className="praxis-grid">
+            {philosophy.praxes.map((praxis) => (
+              <article className={`praxis-panel praxis-${praxis.id}`} key={praxis.id}>
+                <span>{praxis.label}</span>
+                <h3>{praxis.name}</h3>
+                <p>{praxis.description}</p>
+                <small>{praxis.emphasis}</small>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section className="philosophy-section" id="practica">
+          <div className="philosophy-section-heading">
+            <Eyebrow>03 / La práctica</Eyebrow>
+            <h2>Del propósito al <em>presente.</em></h2>
+          </div>
+          <ol className="practice-list">
+            {philosophy.practice.map((step, index) => (
+              <li key={step.title}>
+                <span>0{index + 1}</span>
+                <div><h3>{step.title}</h3><p>{step.description}</p></div>
+              </li>
+            ))}
+          </ol>
+        </section>
+        <section className="philosophy-section glossary-section" id="glosario">
+          <div className="philosophy-section-heading">
+            <Eyebrow>04 / Glosario mínimo</Eyebrow>
+            <h2>Palabras propias <em>del modelo.</em></h2>
+          </div>
+          <label className="glossary-search">
+            <span>Buscar un concepto</span>
+            <input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Ej. presencia" />
+          </label>
+          <p className="glossary-result-count" aria-live="polite">{visibleTerms.length} {visibleTerms.length === 1 ? 'término' : 'términos'}</p>
+          <dl className="philosophy-glossary">
+            {visibleTerms.map(([term, definition]) => (
+              <div key={term}><dt>{term}</dt><dd>{definition}</dd></div>
+            ))}
+          </dl>
+          {visibleTerms.length === 0 && <p className="glossary-empty">No hay conceptos que coincidan. Prueba otra palabra.</p>}
+        </section>
+        <aside className="philosophy-open-questions">
+          <Eyebrow>Para seguir pensando</Eyebrow>
+          <p>El manuscrito conecta su propuesta con afirmaciones sobre evolución, física, información y consciencia. Esas conexiones necesitan fuentes completas y revisión independiente antes de presentarse como hechos. La pregunta filosófica queda abierta; la evidencia también debe quedar a la vista.</p>
+        </aside>
       </div>
     </article>
   );
